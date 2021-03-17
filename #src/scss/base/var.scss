@@ -1,30 +1,28 @@
 // === Sizes ===
-$size-container: 1131;
+$size-container: 1208;
 $layoutDesktop: 1366;
 $layoutMobile: 320;
-$size-header-height: 91px;
-$size-header-height-mobile: 55px;
+$size-header-height: 117px;
+$size-header-height-mobile: 72px;
 
 // === Font ===
-$fontMain: "Lato";
-$fontSecond: "CenturyGothic";
-$fontThird: "Roboto";
+$fontMain: "Gotham Pro";
 $fontWeight: 400;
-$fontSize: 20;
-$fontSizeMobile: 15;
-$lineHeight: 32;
-$fontColor: #333;
+$fontSize: 16;
+$fontSizeMobile: 14;
+$lineHeight: 26;
+$fontColor: #000;
 // === Color ===
 
 $Black: #000;
 $White: #fff;
-$Gray: #333;
-$Gray2: #f9f9f9;
-$Gray3: #bdbdbd;
-$DGray: #4f4f4f;
-$DGray2: #828282;
-$DBlue: #154b62;
-$DBlue2: #203842;
-$Cyan: #3196a9;
-$Cyan2: #dbe8ec;
-$Cyan3: #183741;
+$Grey: #888888;
+$Grey2: #5f656d;
+$Grey3: #bfbfbf;
+$LGrey: #e0e0e0;
+$Green: #a8c326;
+$Green2: #4ccc1f;
+$Violet: #9366f2;
+$Violet2: #7f47f4;
+$Violet3: #ebe4f9;
+$Red: #ff0000;

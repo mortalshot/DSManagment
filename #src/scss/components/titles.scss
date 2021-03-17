@@ -1,3 +1,25 @@
 .title {
-    
+    &-h1 {
+        font-weight: 700;
+        @include adaptiv-font(44, 24, 53, 1);
+    }
+
+    &-h2 {
+        font-weight: 700;
+        @include adaptiv-font(34, 24, 41, 1);
+        color: $Black;
+
+        span {
+            @include adaptiv-value("margin-bottom", 20, 8, 1);
+            font-size: 12px;
+            line-height: 16px;
+            color: $Grey3;
+            text-transform: uppercase;
+        }
+    }
+
+    &-h3 {
+        font-weight: 700;
+        @include adaptiv-font(30, 24, 36, 1);
+    }
 }

@@ -12,9 +12,380 @@
 
 // === fonts ===
 @import "fonts";
+@import "iconfonts";
 
 // === Base ===
 @import "base/index";
 
 // === Components ===
 @import "components/index";
+
+// === HEADER START ===
+.header {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 50;
+	transition: 0.3s ease box-shadow 0s;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 2;
+		transition: 0.3s ease background-color 0s;
+	}
+
+	&.bg {
+		box-shadow: 0px -1px 26px -7px rgba(33, 55, 65, 0.61);
+
+		&::before {
+			background-color: $White;
+		}
+	}
+
+	&__container {
+		max-width: 1344px;
+	}
+
+	&__body {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		position: relative;
+		height: $size-header-height;
+
+		@media screen and (max-width: 991px) {
+			height: $size-header-height-mobile;
+		}
+	}
+
+	&__burger {
+		display: none;
+
+		@media screen and (max-width: 991px) {
+			display: inline-flex;
+			width: 42px;
+			height: 42px;
+			justify-content: center;
+			align-items: center;
+			border-radius: 100%;
+			border: 1px solid $LGrey;
+			z-index: 4;
+
+			&.active {
+				.header__burger-inner {
+					&::before {
+						transform: rotate(45deg);
+						top: 5px;
+					}
+
+					&::after {
+						transform: rotate(-45deg);
+						bottom: 5px;
+					}
+
+					span {
+						transform: scale(0);
+					}
+				}
+			}
+		}
+	}
+
+	&__burger-inner {
+		@media screen and (max-width: 991px) {
+			display: block;
+			width: 15px;
+			height: 12px;
+			transition: 0.3s ease all 0s;
+			position: relative;
+
+			&::before,
+			&::after,
+			span {
+				content: "";
+				background-color: $Black;
+				position: absolute;
+				width: 100%;
+				height: 2px;
+				left: 0;
+				transition: 0.3s ease all 0s;
+				border-radius: 20px;
+			}
+
+			&::before {
+				top: 0;
+			}
+
+			&::after {
+				bottom: 0;
+			}
+
+			span {
+				width: 70%;
+				top: 5px;
+			}
+		}
+	}
+
+	&__logo {
+		z-index: 2;
+		@include adaptiv-value("margin-right", 80, 0, 1);
+		transition: 0.3s ease opacity 0s;
+
+		@media screen and (min-width: 992px) {
+			&:hover {
+				opacity: 0.8;
+			}
+		}
+		@media screen and (max-width: 991px) {
+			margin: 0;
+		}
+	}
+
+	&__menu {
+		display: flex;
+		align-items: center;
+		flex: 1 1 auto;
+
+		@media screen and (max-width: 991px) {
+			position: fixed;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			max-width: 266px;
+			height: 100%;
+			overflow: auto;
+			background-color: $White;
+			box-shadow: 0px 4px 74px rgba(0, 0, 0, 0.15);
+			padding: 70px 15px 25px;
+			z-index: 3;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			transition: 0.3s ease all 0s;
+
+			&.active {
+				left: 0;
+			}
+		}
+	}
+
+	&__list {
+		display: flex;
+		align-items: center;
+		flex: 1 1 auto;
+		z-index: 2;
+
+		@media screen and (max-width: 991px) {
+			display: block;
+		}
+	}
+
+	&__phone {
+		font-weight: 700;
+		font-size: 15px;
+		line-height: 1;
+		color: $Black;
+		white-space: nowrap;
+		z-index: 2;
+		display: block;
+		@include adaptiv-value("margin-right", 48, 15, 1);
+		transition: 0.3s ease color 0s;
+
+		@media screen and (min-width: 992px) {
+			&:hover {
+				color: $Grey2;
+			}
+		}
+	}
+
+	&__link {
+		display: block;
+		@include adaptiv-value("margin-right", 38, 8, 1);
+		z-index: 2;
+		font-weight: 500;
+		font-size: 12px;
+		line-height: 1;
+		color: $Black;
+		text-decoration: underline;
+		white-space: nowrap;
+		transition: 0.3s ease color 0s;
+
+		@media screen and (min-width: 992px) {
+			&:hover {
+				text-decoration: underline;
+				color: $Grey2;
+			}
+		}
+	}
+
+	&__lc {
+		z-index: 2;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		height: 46px;
+		border-radius: 100px;
+		padding: 15px 14px 15px 22px;
+		border: 1px solid $LGrey;
+		font-weight: 500;
+		font-size: 12px;
+		line-height: 1;
+		color: $Black;
+		white-space: nowrap;
+		transition: 0.3s ease border-color 0s;
+
+		@media screen and (min-width: 992px) {
+			&:hover {
+				border-color: $Violet;
+			}
+		}
+		@media screen and (max-width: 575px) {
+			width: 42px;
+			height: 42px;
+			padding: 0;
+		}
+
+		span {
+			margin-right: 16px;
+
+			@media screen and (max-width: 575px) {
+				display: none;
+			}
+		}
+
+		i {
+			font-size: 16px;
+		}
+	}
+}
+
+.menu {
+	&__list {
+	}
+
+	&__item {
+		@include adaptiv-value("margin-right", 32, 8, 1);
+	}
+
+	&__link {
+		font-size: 14px;
+		line-height: 1;
+		color: $Black;
+		transition: 0.3s ease color 0s;
+
+		@media screen and (min-width: 992px) {
+			&:hover {
+				color: $Grey2;
+			}
+		}
+	}
+}
+// === HEADER END ===
+
+// === MAIN START ===
+.main {
+	overflow: hidden;
+	// background: url(../img/main/bg.svg) no-repeat right/contain;
+	@include adaptiv-value("padding-top", 65, 26, 1);
+	@include adaptiv-value("padding-bottom", 65, 26, 1);
+
+	&__row {
+		@media screen and (min-width: 768px) {
+			display: flex;
+		}
+	}
+
+	&__content {
+		flex: 0 0 56%;
+
+		@media screen and (max-width: 767px) {
+			padding-bottom: 20px;
+		}
+	}
+
+	&__title {
+		@include adaptiv-value("padding-top", 35, 0, 1);
+		@include adaptiv-value("padding-bottom", 35, 0, 1);
+		margin-bottom: 14px;
+		position: relative;
+
+		@media screen and (max-width: 575px) {
+			margin-bottom: 32px;
+		}
+
+		&::before {
+			content: "";
+			display: block;
+			height: 100%;
+			@include adaptiv-value("width", 28, 6, 1);
+			background-color: $Violet2;
+			position: absolute;
+			top: 0;
+			left: -9px;
+			transform: translate(-100%, 0);
+
+			@media screen and (min-width: $layoutDesktop + 'px') {
+				left: -80px;
+			}
+		}
+	}
+
+	&__text {
+		@include adaptiv-font(18, 14, 25, 1);
+		@include adaptiv-value("margin-bottom", 65, 40, 1);
+		color: $Grey;
+	}
+
+	&__form {
+	}
+
+	&__parallax {
+	}
+}
+
+.swing-1 {
+	animation: swing 4s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
+	z-index: 1;
+}
+
+.swing-2 {
+	animation: swing 3.5s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
+	z-index: 2;
+}
+
+.swing-3 {
+	animation: swing 3s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
+	z-index: 3;
+}
+
+.swing-4 {
+	animation: swing 2.5s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
+	z-index: 4;
+}
+
+@keyframes swing {
+	0% {
+		-webkit-transform: rotateZ(10deg);
+		-moz-transform: rotateZ(10deg);
+		transform: rotateZ(10deg);
+	}
+	100% {
+		-webkit-transform: rotateZ(-10deg);
+		-moz-transform: rotateZ(-10deg);
+		transform: rotateZ(-10deg);
+	}
+}
+// === MAIN END ===
+
+// === HEADER START ===
+
+// === HEADER END ===
