@@ -4,203 +4,180 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 $(document).ready(function () {
   // Dynamic Adapt v.1
-  // HTML data-da="where(uniq class name),position(digi),when(breakpoint)"
-  // e.x. data-da="item,2,992"
+  // HTML data-da="where(uniq class name),when(breakpoint),position(digi)"
+  // e.x. data-da=".item,992,2"
   // Andrikanych Yevhen 2020
   // https://www.youtube.com/c/freelancerlifestyle
   "use strict";
 
-  (function () {
-    var originalPositions = [];
-    var daElements = document.querySelectorAll('[data-da]');
-    var daElementsArray = [];
-    var daMatchMedia = []; //Заполняем массивы
-
-    if (daElements.length > 0) {
-      var number = 0;
-
-      for (var index = 0; index < daElements.length; index++) {
-        var daElement = daElements[index];
-        var daMove = daElement.getAttribute('data-da');
-
-        if (daMove != '') {
-          var daArray = daMove.split(',');
-          var daPlace = daArray[1] ? daArray[1].trim() : 'last';
-          var daBreakpoint = daArray[2] ? daArray[2].trim() : '767';
-          var daType = daArray[3] === 'min' ? daArray[3].trim() : 'max';
-          var daDestination = document.querySelector('.' + daArray[0].trim());
-
-          if (daArray.length > 0 && daDestination) {
-            daElement.setAttribute('data-da-index', number); //Заполняем массив первоначальных позиций
-
-            originalPositions[number] = {
-              "parent": daElement.parentNode,
-              "index": indexInParent(daElement)
-            }; //Заполняем массив элементов 
-
-            daElementsArray[number] = {
-              "element": daElement,
-              "destination": document.querySelector('.' + daArray[0].trim()),
-              "place": daPlace,
-              "breakpoint": daBreakpoint,
-              "type": daType
-            };
-            number++;
-          }
-        }
-      }
-
-      dynamicAdaptSort(daElementsArray); //Создаем события в точке брейкпоинта
-
-      for (var _index = 0; _index < daElementsArray.length; _index++) {
-        var el = daElementsArray[_index];
-        var _daBreakpoint = el.breakpoint;
-        var _daType = el.type;
-        daMatchMedia.push(window.matchMedia("(" + _daType + "-width: " + _daBreakpoint + "px)"));
-
-        daMatchMedia[_index].addListener(dynamicAdapt);
-      }
-    } //Основная функция
-
-
-    function dynamicAdapt(e) {
-      for (var _index2 = 0; _index2 < daElementsArray.length; _index2++) {
-        var _el = daElementsArray[_index2];
-        var _daElement = _el.element;
-        var _daDestination = _el.destination;
-        var _daPlace = _el.place;
-        var _daBreakpoint2 = _el.breakpoint;
-        var daClassname = "_dynamic_adapt_" + _daBreakpoint2;
-
-        if (daMatchMedia[_index2].matches) {
-          //Перебрасываем элементы
-          if (!_daElement.classList.contains(daClassname)) {
-            var actualIndex = indexOfElements(_daDestination)[_daPlace];
-
-            if (_daPlace === 'first') {
-              actualIndex = indexOfElements(_daDestination)[0];
-            } else if (_daPlace === 'last') {
-              actualIndex = indexOfElements(_daDestination)[indexOfElements(_daDestination).length];
-            }
-
-            _daDestination.insertBefore(_daElement, _daDestination.children[actualIndex]);
-
-            _daElement.classList.add(daClassname);
-          }
-        } else {
-          //Возвращаем на место
-          if (_daElement.classList.contains(daClassname)) {
-            dynamicAdaptBack(_daElement);
-
-            _daElement.classList.remove(daClassname);
-          }
-        }
-      }
-
-      customAdapt();
-    } //Вызов основной функции
-
-
-    dynamicAdapt(); //Функция возврата на место
-
-    function dynamicAdaptBack(el) {
-      var daIndex = el.getAttribute('data-da-index');
-      var originalPlace = originalPositions[daIndex];
-      var parentPlace = originalPlace['parent'];
-      var indexPlace = originalPlace['index'];
-      var actualIndex = indexOfElements(parentPlace, true)[indexPlace];
-      parentPlace.insertBefore(el, parentPlace.children[actualIndex]);
-    } //Функция получения индекса внутри родителя
-
-
-    function indexInParent(el) {
-      var children = Array.prototype.slice.call(el.parentNode.children);
-      return children.indexOf(el);
-    } //Функция получения массива индексов элементов внутри родителя 
-
-
-    function indexOfElements(parent, back) {
-      var children = parent.children;
-      var childrenArray = [];
-
-      for (var i = 0; i < children.length; i++) {
-        var childrenElement = children[i];
-
-        if (back) {
-          childrenArray.push(i);
-        } else {
-          //Исключая перенесенный элемент
-          if (childrenElement.getAttribute('data-da') == null) {
-            childrenArray.push(i);
-          }
-        }
-      }
-
-      return childrenArray;
-    } //Сортировка объекта
-
-
-    function dynamicAdaptSort(arr) {
-      arr.sort(function (a, b) {
-        if (a.breakpoint > b.breakpoint) {
-          return -1;
-        } else {
-          return 1;
-        }
-      });
-      arr.sort(function (a, b) {
-        if (a.place > b.place) {
-          return 1;
-        } else {
-          return -1;
-        }
-      });
-    } //Дополнительные сценарии адаптации
-
-
-    function customAdapt() {//const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    }
-  })();
-  /*
-  let block = document.querySelector('.click');
-  block.addEventListener("click", function (e) {
-  	alert('Все ок ;)');
-  });
-  */
-
-  /*
-  //Объявляем переменные
-  const parent_original = document.querySelector('.content__blocks_city');
-  const parent = document.querySelector('.content__column_river');
-  const item = document.querySelector('.content__block_item');
-  //Слушаем изменение размера экрана
-  window.addEventListener('resize', move);
-  //Функция
-  function move(){
-  	const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-  	if (viewport_width <= 992) {
-  		if (!item.classList.contains('done')) {
-  			parent.insertBefore(item, parent.children[2]);
-  			item.classList.add('done');
-  		}
-  	} else {
-  		if (item.classList.contains('done')) {
-  			parent_original.insertBefore(item, parent_original.children[2]);
-  			item.classList.remove('done');
-  		}
-  	}
+  function DynamicAdapt(type) {
+    this.type = type;
   }
-  //Вызываем функцию
-  move();
-  */
 
+  DynamicAdapt.prototype.init = function () {
+    var _this2 = this;
+
+    var _this = this; // массив объектов
+
+
+    this.оbjects = [];
+    this.daClassname = "_dynamic_adapt_"; // массив DOM-элементов
+
+    this.nodes = document.querySelectorAll("[data-da]"); // наполнение оbjects объктами
+
+    for (var i = 0; i < this.nodes.length; i++) {
+      var node = this.nodes[i];
+      var data = node.dataset.da.trim();
+      var dataArray = data.split(",");
+      var оbject = {};
+      оbject.element = node;
+      оbject.parent = node.parentNode;
+      оbject.destination = document.querySelector(dataArray[0].trim());
+      оbject.breakpoint = dataArray[1] ? dataArray[1].trim() : "767";
+      оbject.place = dataArray[2] ? dataArray[2].trim() : "last";
+      оbject.index = this.indexInParent(оbject.parent, оbject.element);
+      this.оbjects.push(оbject);
+    }
+
+    this.arraySort(this.оbjects); // массив уникальных медиа-запросов
+
+    this.mediaQueries = Array.prototype.map.call(this.оbjects, function (item) {
+      return '(' + this.type + "-width: " + item.breakpoint + "px)," + item.breakpoint;
+    }, this);
+    this.mediaQueries = Array.prototype.filter.call(this.mediaQueries, function (item, index, self) {
+      return Array.prototype.indexOf.call(self, item) === index;
+    }); // навешивание слушателя на медиа-запрос
+    // и вызов обработчика при первом запуске
+
+    var _loop = function _loop(_i) {
+      var media = _this2.mediaQueries[_i];
+      var mediaSplit = String.prototype.split.call(media, ',');
+      var matchMedia = window.matchMedia(mediaSplit[0]);
+      var mediaBreakpoint = mediaSplit[1]; // массив объектов с подходящим брейкпоинтом
+
+      var оbjectsFilter = Array.prototype.filter.call(_this2.оbjects, function (item) {
+        return item.breakpoint === mediaBreakpoint;
+      });
+      matchMedia.addListener(function () {
+        _this.mediaHandler(matchMedia, оbjectsFilter);
+      });
+
+      _this2.mediaHandler(matchMedia, оbjectsFilter);
+    };
+
+    for (var _i = 0; _i < this.mediaQueries.length; _i++) {
+      _loop(_i);
+    }
+  };
+
+  DynamicAdapt.prototype.mediaHandler = function (matchMedia, оbjects) {
+    if (matchMedia.matches) {
+      for (var i = 0; i < оbjects.length; i++) {
+        var оbject = оbjects[i];
+        оbject.index = this.indexInParent(оbject.parent, оbject.element);
+        this.moveTo(оbject.place, оbject.element, оbject.destination);
+      }
+    } else {
+      for (var _i2 = 0; _i2 < оbjects.length; _i2++) {
+        var _bject = оbjects[_i2];
+
+        if (_bject.element.classList.contains(this.daClassname)) {
+          this.moveBack(_bject.parent, _bject.element, _bject.index);
+        }
+      }
+    }
+  }; // Функция перемещения
+
+
+  DynamicAdapt.prototype.moveTo = function (place, element, destination) {
+    element.classList.add(this.daClassname);
+
+    if (place === 'last' || place >= destination.children.length) {
+      destination.insertAdjacentElement('beforeend', element);
+      return;
+    }
+
+    if (place === 'first') {
+      destination.insertAdjacentElement('afterbegin', element);
+      return;
+    }
+
+    destination.children[place].insertAdjacentElement('beforebegin', element);
+  }; // Функция возврата
+
+
+  DynamicAdapt.prototype.moveBack = function (parent, element, index) {
+    element.classList.remove(this.daClassname);
+
+    if (parent.children[index] !== undefined) {
+      parent.children[index].insertAdjacentElement('beforebegin', element);
+    } else {
+      parent.insertAdjacentElement('beforeend', element);
+    }
+  }; // Функция получения индекса внутри родителя
+
+
+  DynamicAdapt.prototype.indexInParent = function (parent, element) {
+    var array = Array.prototype.slice.call(parent.children);
+    return Array.prototype.indexOf.call(array, element);
+  }; // Функция сортировки массива по breakpoint и place 
+  // по возрастанию для this.type = min
+  // по убыванию для this.type = max
+
+
+  DynamicAdapt.prototype.arraySort = function (arr) {
+    if (this.type === "min") {
+      Array.prototype.sort.call(arr, function (a, b) {
+        if (a.breakpoint === b.breakpoint) {
+          if (a.place === b.place) {
+            return 0;
+          }
+
+          if (a.place === "first" || b.place === "last") {
+            return -1;
+          }
+
+          if (a.place === "last" || b.place === "first") {
+            return 1;
+          }
+
+          return a.place - b.place;
+        }
+
+        return a.breakpoint - b.breakpoint;
+      });
+    } else {
+      Array.prototype.sort.call(arr, function (a, b) {
+        if (a.breakpoint === b.breakpoint) {
+          if (a.place === b.place) {
+            return 0;
+          }
+
+          if (a.place === "first" || b.place === "last") {
+            return 1;
+          }
+
+          if (a.place === "last" || b.place === "first") {
+            return -1;
+          }
+
+          return b.place - a.place;
+        }
+
+        return b.breakpoint - a.breakpoint;
+      });
+      return;
+    }
+  };
+
+  var da = new DynamicAdapt("min");
+  da.init();
   /*
       jQuery Masked Input Plugin
       Copyright (c) 2007 - 2015 Josh Bush (digitalbush.com)
       Licensed under the MIT license (http://digitalbush.com/projects/masked-input-plugin/#license)
       Version: 1.4.1
   */
-
 
   !function (a) {
     "function" == typeof define && define.amd ? define(["jquery"], a) : a("object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? require("jquery") : jQuery);
@@ -454,10 +431,17 @@ $(document).ready(function () {
       document.querySelector('body').classList.add('no-webp');
     }
   });
-  $('.header__burger').click(function (event) {
-    $('.header__burger, .header__menu').toggleClass('active');
-    $('body').toggleClass('lock');
-  });
+  var iconMenu = document.querySelector('.header__burger');
+  var menuBody = document.querySelector('.header__menu');
+
+  if (iconMenu) {
+    iconMenu.addEventListener('click', function () {
+      document.body.classList.toggle('lock');
+      iconMenu.classList.toggle('active');
+      menuBody.classList.toggle('active');
+    });
+  }
+
   var scroll = $(window).scrollTop();
 
   if (scroll > 0) {
@@ -472,7 +456,40 @@ $(document).ready(function () {
     } else {
       $('.header').removeClass('bg');
     }
-  }); // === FORM INPUT FOCUS CONDITION ===
+  }); // Прокрутка при клике
+
+  var menuLinks = document.querySelectorAll('.menu__link[data-goto]');
+
+  if (menuLinks.length > 0) {
+    var onMenuLinkClick = function onMenuLinkClick(e) {
+      var menuLink = e.target;
+
+      if (menuLink.dataset["goto"] && document.querySelector(menuLink.dataset["goto"])) {
+        var gotoBlock = document.querySelector(menuLink.dataset["goto"]);
+        var gotoBlockValue = gotoBlock.getBoundingClientRect().top + pageYOffset - document.querySelector('header').offsetHeight;
+
+        if (iconMenu.classList.contains('active')) {
+          removeActive();
+        }
+
+        $('body,html').animate({
+          scrollTop: gotoBlockValue
+        }, 1000);
+        e.preventDefault();
+      }
+    };
+
+    var removeActive = function removeActive() {
+      document.body.classList.remove('lock');
+      iconMenu.classList.remove('active');
+      menuBody.classList.remove('active');
+    };
+
+    menuLinks.forEach(function (menuLink) {
+      menuLink.addEventListener('click', onMenuLinkClick);
+    });
+  } // === FORM INPUT FOCUS CONDITION ===
+
 
   $('.form__input').focus(function () {
     $(this).closest('.form__item-wrapper').addClass('focus');
@@ -483,6 +500,34 @@ $(document).ready(function () {
   // === PHONE INPUT MASK START ===
 
   $('.form__input--phone').mask("+7 (999) 999-99-99"); // === PHONE INPUT MASK END ===
+  // $('.gallery__main').slick({
+  //     slidesToShow: 1,
+  //     slidesToScroll: 1,
+  //     arrows: false,
+  //     fade: true,
+  //     asNavFor: '.gallery__thumbnails',
+  // });
+
+  $('.statistics__cards').slick({
+    dots: true,
+    slidesToShow: 1,
+    arrows: false,
+    mobileFirst: true,
+    responsive: [{
+      breakpoint: 992,
+      settings: "unslick"
+    }, {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        adaptiveHeight: true
+      }
+    }]
+  }); // $('#productGallery .tabs-triggers__item').click(function() {
+  //     $('.gallery__main').slick('refresh');
+  //     $('.gallery__thumbnails').slick('refresh');
+  // })
 
   ;
   var scene = document.getElementById('scene');

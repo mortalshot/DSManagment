@@ -10,6 +10,7 @@
         color: $Black;
 
         span {
+            display: block;
             @include adaptiv-value("margin-bottom", 20, 8, 1);
             font-size: 12px;
             line-height: 16px;

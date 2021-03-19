@@ -46,6 +46,10 @@
 		&::before {
 			background-color: $White;
 		}
+
+		.header__body {
+			height: $size-header-height-mobile;
+		}
 	}
 
 	&__container {
@@ -58,9 +62,16 @@
 		align-items: center;
 		position: relative;
 		height: $size-header-height;
+		transition: 0.3s ease height 0s;
 
 		@media screen and (max-width: 991px) {
 			height: $size-header-height-mobile;
+		}
+
+		&.active {
+			&::before {
+				z-index: 5;
+			}
 		}
 	}
 
@@ -75,13 +86,13 @@
 			align-items: center;
 			border-radius: 100%;
 			border: 1px solid $LGrey;
-			z-index: 4;
+			z-index: 5;
 
 			&.active {
 				.header__burger-inner {
 					&::before {
 						transform: rotate(45deg);
-						top: 5px;
+						top: 6px;
 					}
 
 					&::after {
@@ -90,7 +101,7 @@
 					}
 
 					span {
-						transform: scale(0);
+						transform: translate(0, -50%) scale(0);
 					}
 				}
 			}
@@ -102,33 +113,34 @@
 			display: block;
 			width: 15px;
 			height: 12px;
-			transition: 0.3s ease all 0s;
 			position: relative;
 
 			&::before,
 			&::after,
 			span {
-				content: "";
-				background-color: $Black;
 				position: absolute;
-				width: 100%;
-				height: 2px;
 				left: 0;
-				transition: 0.3s ease all 0s;
+				background-color: $Black;
+				width: 100%;
+				height: 10%;
 				border-radius: 20px;
+				transition: 0.3s ease all 0s;
 			}
 
 			&::before {
+				content: "";
 				top: 0;
 			}
 
 			&::after {
+				content: "";
 				bottom: 0;
 			}
 
 			span {
 				width: 70%;
-				top: 5px;
+				top: 50%;
+				transform: translate(0, -50%) scale(1);
 			}
 		}
 	}
@@ -163,17 +175,33 @@
 			overflow: auto;
 			background-color: $White;
 			box-shadow: 0px 4px 74px rgba(0, 0, 0, 0.15);
-			padding: 70px 15px 25px;
+			padding: 0 40px 25px;
 			z-index: 3;
 			display: flex;
 			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			text-align: center;
-			transition: 0.3s ease all 0s;
+			align-items: flex-start;
+			justify-content: flex-start;
+			transition: 0.3s ease left 0s;
+
+			&::before {
+				content: "";
+				background-color: $White;
+				position: fixed;
+				z-index: 4;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				max-width: 266px;
+				height: $size-header-height-mobile;
+				transition: 0.3s ease left 0s;
+			}
 
 			&.active {
 				left: 0;
+
+				&::before {
+					left: 0;
+				}
 			}
 		}
 	}
@@ -186,6 +214,14 @@
 
 		@media screen and (max-width: 991px) {
 			display: block;
+			flex: initial;
+			padding-top: 100px;
+		}
+	}
+
+	&__menu-item {
+		@media screen and (max-width: 991px) {
+			margin: 0px 0px 32px 0px;
 		}
 	}
 
@@ -333,7 +369,7 @@
 			left: -9px;
 			transform: translate(-100%, 0);
 
-			@media screen and (min-width: $layoutDesktop + 'px') {
+			@media screen and (min-width: $layoutDesktop + "px") {
 				left: -80px;
 			}
 		}
@@ -385,6 +421,214 @@
 	}
 }
 // === MAIN END ===
+
+// === ABOUT START ===
+.about {
+	@include adaptiv-value("margin-top", 83, 0, 1);
+
+	&__row {
+		@media screen and (min-width: 768px) {
+			display: flex;
+		}
+	}
+
+	&__left {
+		padding-right: 15px;
+		flex: 0 0 50%;
+
+		@media screen and (max-width: 767px) {
+			padding: 0px 0px 53px 0px;
+		}
+	}
+
+	&__text {
+		max-width: 460px;
+
+		@media screen and (max-width: 767px) {
+			max-width: 100%;
+		}
+	}
+
+	&__right {
+		display: flex;
+		justify-content: center;
+		flex: 0 0 50%;
+	}
+
+	&__cards {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		max-width: 400px;
+		@include adaptiv-value("margin-top", -27, -24, 1);
+		@include adaptiv-value("margin-bottom", -27, -24, 1);
+		@include adaptiv-value("margin-left", -27, -7, 1);
+		@include adaptiv-value("margin-right", -27, -7, 1);
+	}
+
+	&__card {
+		flex: 0 0 50%;
+		@include adaptiv-value("padding-top", 27, 24, 1);
+		@include adaptiv-value("padding-bottom", 27, 24, 1);
+		@include adaptiv-value("padding-left", 27, 7, 1);
+		@include adaptiv-value("padding-right", 27, 7, 1);
+	}
+
+	&__card-wrapper {
+		max-width: 160px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	&__card-icon {
+		position: relative;
+		padding-bottom: 60px;
+		margin-bottom: 16px;
+
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+	}
+
+	&__card-label {
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 20px;
+		color: $Grey;
+	}
+}
+// === ABOUT END ===
+
+// === STATISTICS START ===
+.statistics {
+	@include adaptiv-value("padding-top", 100, 88, 1);
+	padding-bottom: 70px;
+
+	@media screen and (min-width: 992px) {
+		padding-top: 150px;
+	}
+
+	&__container {
+	}
+
+	&__title {
+		@include adaptiv-value("margin-bottom", 40, 24, 1);
+	}
+
+	&__cards {
+		display: flex;
+		flex-wrap: wrap;
+		@include adaptiv-value("margin", -20, -8, 1);
+
+		.statistics__card {
+			@media screen and (max-width: 991px) {
+				display: flex !important;
+			}
+		}
+	}
+
+	&__card {
+		flex: 0 0 33.333%;
+		@include adaptiv-value("padding", 20, 8, 1);
+
+		@media screen and (min-width: 992px) {
+			&:nth-child(3n + 1) {
+				.statistics__card-wrapper {
+					transform: translate(0, -150px);
+				}
+			}
+			&:nth-child(6n) {
+				padding-top: 100px;
+			}
+		}
+		@media screen and (max-width: 991px) {
+			flex: 0 0 50%;
+		}
+		@media screen and (max-width: 575px) {
+			flex: 0 0 100%;
+		}
+
+		&--black {
+			.statistics__card-option {
+				color: $Black;
+			}
+		}
+
+		&--title {
+			@media screen and (max-width: 991px) {
+				padding: 0 0 40px 0;
+			}
+			@media screen and (max-width: 767px) {
+				padding: 0px 0px 20px 0px;
+			}
+		}
+	}
+
+	&__card-wrapper {
+		border-radius: 12px;
+		box-shadow: 0px 44px 41px -40px rgba(0, 0, 0, 0.15), 0px 34px 54px rgba(0, 0, 0, 0.17);
+		@include adaptiv-value("padding-top", 45, 35, 1);
+		padding-bottom: 40px;
+		@include adaptiv-value("padding-left", 40, 5, 1);
+		@include adaptiv-value("padding-right", 40, 5, 1);
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		@include adaptiv-value("min-height", 347, 287, 1);
+
+		@media screen and (max-width: 991px) {
+			box-shadow: 0px 6px 9px -4px rgba(0, 0, 0, 0.15), 0px 4px 10px rgba(0, 0, 0, 0.17);
+		}
+		@media screen and (max-width: 600px) {
+			padding-left: 24px;
+			padding-right: 24px;
+		}
+	}
+
+	&__card-logo {
+		flex: 1 1 auto;
+		margin-bottom: 20px;
+	}
+
+	&__card-options {
+	}
+
+	&__card-option {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		color: $White;
+		@include adaptiv-value("margin-bottom", 24, 16, 1);
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&__card-option-label {
+		padding-right: 10px;
+		font-size: 14px;
+		line-height: 17px;
+		opacity: 0.6;
+	}
+
+	&__card-option-value {
+		font-weight: 700;
+		font-size: 14px;
+		line-height: 17px;
+		text-align: right;
+	}
+
+	.slick-list {
+		padding: 20px 0;
+	}
+}
+// === STATISTICS END ===
 
 // === HEADER START ===
 

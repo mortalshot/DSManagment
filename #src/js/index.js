@@ -4,4 +4,5 @@
 @@include('components/webp.js')
 @@include('components/menu.js')
 @@include('components/form.js')
+@@include('components/slider.js')
 

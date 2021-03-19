@@ -39,8 +39,8 @@ body {
 .container {
     max-width: #{$size-container + px};
     margin: 0 auto;
-    @include adaptiv-value("padding-left", 30, 15, 1);
-    @include adaptiv-value("padding-right", 30, 15, 1);
+    @include adaptiv-value("padding-left", 30, 20, 1);
+    @include adaptiv-value("padding-right", 30, 20, 1);
 }
 
 .row {
@@ -98,5 +98,59 @@ img {
     @media screen and (min-width: 768px) {
         flex: 0 0 50%;
         max-width: 100%;
+    }
+}
+
+.slick-slider {
+    .slick-dots {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+
+        li {
+            margin-right: 20px;
+            display: inline-flex;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            button {
+                flex: 0 0 20px;
+                @include adaptiv-value("width", 20, 14, 1);
+                @include adaptiv-value("height", 20, 14, 1);
+                @include adaptiv-value("flex-basis", 20, 14, 1);
+                border-radius: 50%;
+                border: 1px solid #cecece;
+                font-size: 0;
+                line-height: 0;
+                background-color: transparent;
+                position: relative;
+    
+                &::before {
+                    content: '';
+                    display: block;
+                    @include adaptiv-value("width", 10, 8, 1);
+                    @include adaptiv-value("height", 10, 8, 1);
+                    border-radius: 50%;
+                    background-color: $Violet2;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%) scale(0);
+                    transition: 0.3s ease transform 0s;
+                }
+            }
+
+            &.slick-active {
+                button {
+                    &::before {
+                        transform: translate(-50%, -50%) scale(1);
+                    }
+                }
+            }
+        }
+
     }
 }
