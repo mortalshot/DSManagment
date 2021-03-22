@@ -301,14 +301,30 @@ $('.cases__items').slick({
             breakpoint: 575,
             settings: {
                 slidesToShow: 1,
+                dots: true,
+                arrows: false,
+            }
+        },
+    ]
+});
+
+$('.clients__list').slick({
+    dots: false,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: false,
+    dots: false,
+    responsive: [
+        {
+            breakpoint: 767,
+            settings: {
+                slidesToShow: 4,
             }
         },
         {
-            breakpoint: 450,
+            breakpoint: 575,
             settings: {
-                slidesToShow: 1,
-                dots: true,
-                arrows: false,
+                slidesToShow: 3,
             }
         },
     ]
@@ -318,6 +334,17 @@ $('.cases__items').slick({
 //     $('.gallery__main').slick('refresh');
 //     $('.gallery__thumbnails').slick('refresh');
 // })
+$('.accordion__title').click(function (event) {
+
+    let accordionid = $(this).closest('.accordion').attr("id");
+
+    if ($('#' + accordionid).hasClass('accordion-one')) {
+        $('#' + accordionid + ' ' + '.accordion__title').not($(this)).removeClass('active');
+        $('#' + accordionid + ' ' + '.accordion__text').not($(this).next()).slideUp(300);
+    }
+
+    $(this).toggleClass('active').next().slideToggle(300);
+});
 
 ;
 

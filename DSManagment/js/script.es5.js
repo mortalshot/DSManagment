@@ -1,5 +1,7 @@
 "use strict";
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 $(document).ready(function () {
@@ -9,6 +11,8 @@ $(document).ready(function () {
   // Andrikanych Yevhen 2020
   // https://www.youtube.com/c/freelancerlifestyle
   "use strict";
+
+  var _$$slick;
 
   function DynamicAdapt(type) {
     this.type = type;
@@ -540,21 +544,42 @@ $(document).ready(function () {
     }, {
       breakpoint: 575,
       settings: {
-        slidesToShow: 1
-      }
-    }, {
-      breakpoint: 450,
-      settings: {
         slidesToShow: 1,
         dots: true,
         arrows: false
       }
     }]
-  }); // $('#productGallery .tabs-triggers__item').click(function() {
+  });
+  $('.clients__list').slick((_$$slick = {
+    dots: false,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: false
+  }, _defineProperty(_$$slick, "dots", false), _defineProperty(_$$slick, "responsive", [{
+    breakpoint: 767,
+    settings: {
+      slidesToShow: 4
+    }
+  }, {
+    breakpoint: 575,
+    settings: {
+      slidesToShow: 3
+    }
+  }]), _$$slick)); // $('#productGallery .tabs-triggers__item').click(function() {
   //     $('.gallery__main').slick('refresh');
   //     $('.gallery__thumbnails').slick('refresh');
   // })
 
+  $('.accordion__title').click(function (event) {
+    var accordionid = $(this).closest('.accordion').attr("id");
+
+    if ($('#' + accordionid).hasClass('accordion-one')) {
+      $('#' + accordionid + ' ' + '.accordion__title').not($(this)).removeClass('active');
+      $('#' + accordionid + ' ' + '.accordion__text').not($(this).next()).slideUp(300);
+    }
+
+    $(this).toggleClass('active').next().slideToggle(300);
+  });
   ;
   var scene = document.getElementById('scene');
   var parallaxInstance = new Parallax(scene);

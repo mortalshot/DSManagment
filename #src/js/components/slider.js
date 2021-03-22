@@ -46,14 +46,30 @@ $('.cases__items').slick({
             breakpoint: 575,
             settings: {
                 slidesToShow: 1,
+                dots: true,
+                arrows: false,
+            }
+        },
+    ]
+});
+
+$('.clients__list').slick({
+    dots: false,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: false,
+    dots: false,
+    responsive: [
+        {
+            breakpoint: 767,
+            settings: {
+                slidesToShow: 4,
             }
         },
         {
-            breakpoint: 450,
+            breakpoint: 575,
             settings: {
-                slidesToShow: 1,
-                dots: true,
-                arrows: false,
+                slidesToShow: 3,
             }
         },
     ]

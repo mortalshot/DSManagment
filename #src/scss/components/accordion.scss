@@ -1,53 +1,49 @@
 .accordion {
-    // .accordion__title
+    &__item {
+        border-bottom: 1px solid $LGrey;
+        font-size: 16px;
+        line-height: 19px;
+
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+
     &__title {
-        padding: 20px;
         position: relative;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        margin: 20px 0;
+        font-weight: 700;
+        transition: 0.5s ease color 0s;
 
-        @media screen and (max-width: 450px) {
-            padding: 20px 30px 20px 0;
+        @media screen and (min-width: 992px) {
+            &:hover {
+                color: $Violet2;
+            }
         }
 
-        &::before,
-        &::after {
-            content: "";
-            width: 9px;
-            height: 1px;
-            background-color: #fff;
-            position: absolute;
-            top: 50%;
-            transform: translate(0, -50%);
+        span {
+            flex: 1 1 auto;
+            padding-right: 15px;
+        }
+
+        i {
             transition: 0.3s ease all 0s;
         }
 
-        &::before {
-            transform: translate(0, -50%) rotate(-45deg);
-            right: 0;
-        }
-
-        &::after {
-            transform: translate(0, -50%) rotate(45deg);
-            right: 6px;
-        }
-
         &.active {
-            &::before {
-                transform: translate(0, -50%) rotate(45deg);
-            }
-            &::after {
-                transform: translate(0, -50%) rotate(-45deg);
+            i {
+                transform: rotate(135deg);
             }
         }
     }
 
-    // .accordion__text
     &__text {
-        padding: 0px 20px 20px;
         display: none;
-
-        @media screen and (max-width: 450px) {
-            padding: 0px 30px 20px 0;
-        }
+        padding-bottom: 30px;
+        line-height: 24px;
     }
 }

@@ -305,9 +305,6 @@
 }
 
 .menu {
-	&__list {
-	}
-
 	&__item {
 		@include adaptiv-value("margin-right", 32, 8, 1);
 	}
@@ -379,12 +376,6 @@
 		@include adaptiv-font(18, 14, 25, 1);
 		@include adaptiv-value("margin-bottom", 65, 40, 1);
 		color: $Grey;
-	}
-
-	&__form {
-	}
-
-	&__parallax {
 	}
 }
 
@@ -513,9 +504,6 @@
 		padding-top: 150px;
 	}
 
-	&__container {
-	}
-
 	&__title {
 		@include adaptiv-value("margin-bottom", 40, 24, 1);
 	}
@@ -593,9 +581,6 @@
 	&__card-logo {
 		flex: 1 1 auto;
 		margin-bottom: 20px;
-	}
-
-	&__card-options {
 	}
 
 	&__card-option {
@@ -795,9 +780,6 @@
 		}
 	}
 
-	&__item-btn {
-	}
-
 	&__item-price {
 		font-weight: 700;
 		font-size: 24px;
@@ -831,9 +813,6 @@
 	&__item-option-icon {
 		flex: 0 0 24px;
 		margin-right: 16px;
-	}
-
-	&__item-option-text {
 	}
 
 	&__item--reverse {
@@ -944,9 +923,6 @@
 			}
 		}
 
-		.slick-next {
-		}
-
 		.slick-prev {
 			right: 83px;
 			@include adaptiv-value("right", 103, 83, 1);
@@ -1005,6 +981,8 @@
 
 	&__item-product-image {
 		flex: 0 0 126px;
+
+		@include adaptiv-value("flex-basis", 126, 117, 1);
 	}
 
 	&__item-platform {
@@ -1043,9 +1021,6 @@
 		line-height: 14px;
 	}
 
-	&__item-result {
-	}
-
 	&__item-num {
 		font-weight: 900;
 		font-size: 20px;
@@ -1053,8 +1028,47 @@
 		margin-bottom: 4px;
 	}
 }
-
 // === CASES END ===
+
+// === CLIENTS START ===
+.clients {
+	@include adaptiv-value("margin-top", 130, 80, 1);
+	@include adaptiv-value("margin-bottom", 130, 80, 1);
+
+	&__title {
+		@include adaptiv-value("margin-bottom", 60, 20, 1);
+
+		span {
+			margin-bottom: 8px;
+		}
+	}
+
+	&__list {
+		@include adaptiv-value("margin-left", -15, -10, 1);
+		@include adaptiv-value("margin-right", -15, -10, 1);
+	}
+
+	&__item {
+		@include adaptiv-value("padding-left", 15, 10, 1);
+		@include adaptiv-value("padding-right", 15, 10, 1);
+	}
+}
+// === CLIENTS END ===
+
+// === FAQ START ===
+.faq {
+	@include adaptiv-value("margin-top", 130, 80, 1);
+	@include adaptiv-value("margin-bottom", 130, 80, 1);
+	
+	&__title {
+		@include adaptiv-value("margin-bottom", 40, 20, 1);
+
+		span {
+			margin-bottom: 8px;
+		}
+	}
+}
+// === FAQ END ===
 
 // === HEADER START ===
 
