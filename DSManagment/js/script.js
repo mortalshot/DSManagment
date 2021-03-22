@@ -283,6 +283,37 @@ $('.statistics__cards').slick({
     ]
 });
 
+$('.cases__items').slick({
+    dots: false,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    arrows: true,
+    prevArrow: '<button type="button" class="slick-prev"><i class="icon-arrow-left"></i></button>',
+    nextArrow: '<button type="button" class="slick-next"><i class="icon-arrow-right"></i></button>',
+    responsive: [
+        {
+            breakpoint: 767,
+            settings: {
+                slidesToShow: 2,
+            }
+        },
+        {
+            breakpoint: 575,
+            settings: {
+                slidesToShow: 1,
+            }
+        },
+        {
+            breakpoint: 450,
+            settings: {
+                slidesToShow: 1,
+                dots: true,
+                arrows: false,
+            }
+        },
+    ]
+});
+
 // $('#productGallery .tabs-triggers__item').click(function() {
 //     $('.gallery__main').slick('refresh');
 //     $('.gallery__thumbnails').slick('refresh');
