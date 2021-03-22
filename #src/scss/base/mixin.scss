@@ -24,14 +24,13 @@
 	$addSize: $pcSize - $mobSize;
 	@if $maxSize==1 {
 		font-size: $pcSize + px;
-        line-height: $lineHeight + px;
+        line-height: $lineHeight / $pcSize * 100%;
         
 		@media (max-width: #{$size-container + px}) {
 			font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - #{$layoutMobile + px}) / (#{$layoutDesktop - $layoutMobile})));
-            line-height: calc(#{$lineHeight} / #{$pcSize});
 		}
 	} @else {
 		font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - #{$layoutMobile + px}) / (#{$layoutDesktop - $layoutMobile})));
-        line-height: calc(#{$lineHeight} / #{$pcSize});
+        line-height: $lineHeight / $pcSize * 100%;
 	}
 }

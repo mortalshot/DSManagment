@@ -633,3 +633,254 @@
 // === HEADER START ===
 
 // === HEADER END ===
+
+// === SERVICES START ===
+.services {
+	&__heading {
+		@include adaptiv-value("margin-bottom", 65, 20, 1);
+
+		.title-h2 {
+			span {
+				@include adaptiv-value("margin-bottom", 8, 8, 1);
+			}
+		}
+	}
+
+	&__item {
+		position: relative;
+		overflow: hidden;
+
+		&::before,
+		&::after {
+			content: "";
+			display: block;
+			position: absolute;
+			pointer-events: none;
+		}
+		&::before {
+			width: 672px;
+			height: 282px;
+			background: url(../img/services/service-bg.svg) no-repeat center/contain;
+		}
+		&::after {
+			width: 759px;
+			height: 193px;
+			background: url(../img/services/service-bg-2.svg) no-repeat center/contain;
+			bottom: 0;
+			@include adaptiv-value("left", 48, 0, 1);
+		}
+
+		&:nth-child(2n) {
+			.services__item-action {
+				flex-direction: row-reverse;
+				justify-content: flex-end;
+			}
+		}
+	}
+
+	&__item-wrapper {
+		min-height: 563px;
+		color: $White;
+
+		@media screen and (min-width: 768px) {
+			display: flex;
+		}
+	}
+
+	&__item-image {
+		flex: 0 0 34%;
+		position: relative;
+
+		@media screen and (min-width: 1921px) {
+			position: absolute;
+			width: 463px;
+			height: 100%;
+		}
+		@media screen and (max-width: 767px) {
+			padding-bottom: 50%;
+			min-height: 180px;
+
+			img {
+				object-position: bottom;
+			}
+		}
+
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: right;
+			z-index: 1;
+		}
+	}
+
+	&__item-content {
+		width: 100%;
+		max-width: #{$size-container + px};
+		@include adaptiv-value("padding-top", 65, 48, 1);
+		@include adaptiv-value("padding-bottom", 65, 48, 1);
+		padding-left: 0;
+		position: relative;
+		z-index: 2;
+		@include adaptiv-value("padding-right", 80, 20, 1);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		@media screen and (min-width: 1921px) {
+			margin: 0 auto;
+			padding-left: 30px !important;
+			padding-right: 30px !important;
+		}
+		@media screen and (max-width: 767px) {
+			padding-top: 20px;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+	}
+
+	&__item-title {
+		max-width: 342px;
+		@include adaptiv-value("margin-bottom", 45, 25, 1);
+	}
+
+	&__item-row {
+		margin: 0 -10px;
+		@include adaptiv-value("margin-bottom", 45, 40, 1);
+
+		@media screen and (min-width: 451px) {
+			display: flex;
+		}
+	}
+
+	&__item-column {
+		flex: 0 0 50%;
+		padding: 0 10px;
+
+		@media screen and (max-width: 451px) {
+			margin: 30px 0;
+
+			&:first-child {
+				margin-top: 0;
+			}
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	&__item-subtitle {
+		@include adaptiv-value("margin-bottom", 30, 20, 1);
+		max-width: 355px;
+	}
+
+	&__item-text {
+		max-width: 300px;
+		font-size: 14px;
+		line-height: 22px;
+	}
+
+	&__item-action {
+		display: flex;
+		justify-content: flex-start;
+		@include adaptiv-value("margin-left", -22, -8, 1);
+		@include adaptiv-value("margin-right", -22, -8, 1);
+
+		@media screen and (max-width: 450px) {
+			flex-direction: column-reverse;
+		}
+
+		& > div {
+			@include adaptiv-value("padding-left", 22, 8, 1);
+			@include adaptiv-value("padding-right", 22, 8, 1);
+		}
+	}
+
+	&__item-btn {
+	}
+
+	&__item-price {
+		font-weight: 700;
+		font-size: 24px;
+		line-height: 38px;
+		display: inline-flex;
+		align-items: center;
+
+		@media screen and (max-width: 450px) {
+			margin-bottom: 16px;
+		}
+
+		span {
+			font-weight: 400;
+			font-size: 12px;
+			line-height: 17px;
+			padding-left: 22px;
+			display: inline-block;
+		}
+	}
+
+	&__item-option {
+		display: flex;
+		align-items: center;
+		margin-bottom: 16px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&__item-option-icon {
+		flex: 0 0 24px;
+		margin-right: 16px;
+	}
+
+	&__item-option-text {
+	}
+
+	&__item--reverse {
+		.services {
+			&__item-wrapper {
+				flex-direction: row-reverse;
+			}
+
+			&__item-content {
+				@include adaptiv-value("padding-left", 80, 20, 1);
+				padding-right: 0;
+			}
+
+			&__item-image {
+				img {
+					object-position: left;
+				}
+			}
+		}
+	}
+
+	&__item--dark {
+		&::before {
+			background: url(../img/services/service-bg-dark.svg) no-repeat center/cover;
+		}
+		&::after {
+			background: url(../img/services/service-bg-dark-2.svg) no-repeat center/cover;
+		}
+
+		.services__item-wrapper {
+			color: $Black;
+		}
+
+		.btn {
+			background-color: $Violet2;
+			color: $White;
+
+			@media screen and (min-width: 992px) {
+				&:hover {
+					background-color: $Violet;
+				}
+			}
+		}
+	}
+}
+// === SERVICES END ===

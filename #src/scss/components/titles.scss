@@ -23,4 +23,16 @@
         font-weight: 700;
         @include adaptiv-font(30, 24, 36, 1);
     }
+
+    &-h4 {
+        @include adaptiv-font(20, 16, 32, 1);
+    }
+
+    &-h5 {
+        @include adaptiv-font(18, 14, 25, 1);
+    }
+
+    &-h6 {
+        @include adaptiv-font(16, 14, 19, 1);
+    }
 }
