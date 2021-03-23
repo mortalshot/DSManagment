@@ -417,24 +417,6 @@ $(document).ready(function () {
       }
     });
   });
-
-  function testWebP(callback) {
-    var webP = new Image();
-
-    webP.onload = webP.onerror = function () {
-      callback(webP.height == 2);
-    };
-
-    webP.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
-  }
-
-  testWebP(function (support) {
-    if (support == true) {
-      document.querySelector('body').classList.add('webp');
-    } else {
-      document.querySelector('body').classList.add('no-webp');
-    }
-  });
   var iconMenu = document.querySelector('.header__burger');
   var menuBody = document.querySelector('.header__menu');
 
@@ -503,7 +485,7 @@ $(document).ready(function () {
   }); // === FORM INPUT FOCUS CONDITION END ===
   // === PHONE INPUT MASK START ===
 
-  $('.form__input--phone').mask("+7 (999) 999-99-99"); // === PHONE INPUT MASK END ===
+  $('.form__input--phone').mask("+7 (999) 999 99 99"); // === PHONE INPUT MASK END ===
   // $('.gallery__main').slick({
   //     slidesToShow: 1,
   //     slidesToScroll: 1,
@@ -583,4 +565,6 @@ $(document).ready(function () {
   ;
   var scene = document.getElementById('scene');
   var parallaxInstance = new Parallax(scene);
+  var requestScene = document.getElementById('requestScene');
+  var parallaxInstance = new Parallax(requestScene);
 });

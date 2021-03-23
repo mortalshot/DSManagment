@@ -22,7 +22,7 @@
 									<div class="form__item col-12 col-sm-6">
 										<div class="form__item-wrapper">
 											<label for="formPhone" class="form__label">Телефон*:</label>
-											<input id="formPhone" type="text" name="phone" class="form__input form__input--phone">
+											<input id="formPhone" type="text" name="phone" class="form__input form__input--phone" placeholder="+7 (---) --- -- --">
 										</div>
 										<div class="form__error-txt">Текст сообщение ошибки!</div>
 									</div>
@@ -630,17 +630,61 @@
 			</div>
 		</section>
 
+		<section class="request">
+			<div class="request__content" >
+				<div class="container">
+					<div class="request__row">
+						<div class="request__left">
+							<div class="request__wrapper">
+								<h2 class="request__title title-h2"><span>НАЧНЁМ?</span>Оставьте заявку</h2>
+								<h5 class="request__subtitle title-h5">Наш менеджер свяжется с вами в течении 5 минут и ответит на ваши вопросы</h5>
+							</div>
+						</div>
+						<div class="request__right">
+							<div class="request__form form">
+								<form action="#" id="request" class="form__body">
+									<h4 class="form__title title-h4">Заполните форму</h4>
+									<div class="form__row">
+										<div class="form__item">
+											<div class="form__item-wrapper">
+												<label for="requestName" class="form__label">Имя*:</label>
+												<input id="requestName" type="text" name="name" class="form__input">
+											</div>
+											<div class="form__error-txt">Текст сообщение ошибки!</div>
+										</div>
+									</div>
+									<div class="form__row">
+										<div class="form__item">
+											<div class="form__item-wrapper">
+												<label for="requestPhone" class="form__label">Телефон*:</label>
+												<input id="requestPhone" type="text" name="phone" class="form__input form__input--phone" placeholder="+7 (---) --- -- --">
+											</div>
+											<div class="form__error-txt">Текст сообщение ошибки!</div>
+										</div>
+									</div>
+									<div class="form__row">
+										<div class="form__item mb-0">
+											<button type="submit" class="form__button btn btn--big btn--bg">Оставить заявку</button>
+											<div class="form__privacy">Нажимая на кнопку, вы дёте свое согласие на обработку <a href="">персональных данных</a></div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
+			<div class="request__parallax">
+				<div class="request__bg"><img src="img/form/bg-woman.png" alt="" width="331" height="498"></div>
+				<ul id="requestScene">
+					<li class="layer" data-depth="0.1"><img src="img/form/parallax-1.svg" alt="" class="swing-1"></li>
+					<li class="layer" data-depth="-.15"><img src="img/form/parallax-2.svg" alt="" class="swing-2"></li>
+					<li class="layer" data-depth=".24"><img src="img/form/parallax-3.svg" alt="" class="swing-3"></li>
+					<li class="layer" data-depth="-.13"><img src="img/form/parallax-4.svg" alt="" class="swing-4"></li>
+				</ul>
+			</div>
+		</section>
 	</main>
 
 	@@include('html-components/_footer.html')
