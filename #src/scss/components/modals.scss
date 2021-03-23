@@ -7,7 +7,7 @@
     top: 0;
     left: 0;
     opacity: 0;
-    z-index: 6;
+    z-index: 50;
     visibility: hidden;
     overflow-y: auto;
     overflow-x: hidden;
@@ -29,36 +29,39 @@
         align-items: center;
         justify-content: center;
         padding: 30px 10px;
-
-        @media screen and (max-width: 450px) {
-            padding: 30px 0;
-        }
     }
 
     &__content {
-        // background: $card-color;
-        color: #fff;
-        padding: 60px 40px 64px;
+        background: linear-gradient(146.8deg, #ffffff 0%, #ffffff 99.63%);
+        box-shadow: 0px 76px 172px rgba(0, 0, 0, 0.06), 0px 30.3141px 38.4185px rgba(0, 0, 0, 0.0323888), 0px 7.81791px 11.4382px rgba(0, 0, 0, 0.0189546);
+        border-radius: 15px;
+        @include adaptiv-value("padding", 60, 20, 1);
         width: 100%;
-        max-width: 950px;
+        max-width: 460px;
         position: relative;
         opacity: 0;
         transform: translate(0, -100%);
         transition: 0.8s ease all 0s;
-
-        @media screen and (max-width: 767px) {
-            padding: 25px 10px 60px;
-        }
     }
 
     &__close {
         position: absolute;
-        top: 25px;
-        right: 27px;
+        z-index: 3;
+        top: 20px;
+        right: 20px;
+    }
 
-        @media screen and (max-width: 767px) {
-            top: 15px;
-            right: 7px;
+    .request__form {
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+
+        .form__title {
+            padding-right: 30px;
+        }
+
+        .form__button {
+            @include adaptiv-value("height", 57, 50, 1);
         }
     }
 }

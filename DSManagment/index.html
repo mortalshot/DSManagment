@@ -11,7 +11,7 @@
 
 <body class="site">
     <div class="site__wrap">
-        <header class="site__header header">
+        <header class="site__header header lock-padding">
             <div class="header__container container">
                 <div class="header__body">
                         <div class="header__burger">
@@ -26,18 +26,36 @@
                             </div>
                         </a>
                     </div>
+                    <a href="" class="header__lc header--mobile">
+                        <span>Личный кабинет</span>
+                        <i class="icon-user"></i>
+                    </a>
                     <nav class="header__menu menu">
                         <ul class="header__list menu__list">
-                            <li class="header__menu-item menu__item"><a href="" class="header__menu-link menu__link" data-goto=".services">Услуги</a></li>
-                            <li class="header__menu-item menu__item"><a href="" class="header__menu-link menu__link" data-goto=".cases">Кейсы</a></li>
-                            <li class="header__menu-item menu__item"><a href="" class="header__menu-link menu__link" data-goto=".faq">FAQ</a></li>
+                            <li class="header__menu-item menu__item"><a href="#services" class="header__menu-link menu__link" data-goto=".services">Услуги</a></li>
+                            <li class="header__menu-item menu__item"><a href="#cases" class="header__menu-link menu__link" data-goto=".cases">Кейсы</a></li>
+                            <li class="header__menu-item menu__item"><a href="#faq" class="header__menu-link menu__link" data-goto=".faq">FAQ</a></li>
                         </ul>
                         <a href="tel:+74959234242" class="header__phone">+7 (495) 923 42 42</a>
-                        <a href="" class="header__link">Зарегистрироваться</a>
-                        <a href="" class="header__lc" data-da="header__body, last, 991">
+                        <a href="" class="header__link header--desktop">Зарегистрироваться</a>
+                        <a href="mailto:company@mail.com" class="header__link header--mobile">company@mail.com</a>
+                        <div class="header__file footer__file header--mobile">
+                            <a href="">
+                                <i class="icon-download"></i>
+                                <span>Скачать презентацию</span>
+                            </a>
+                        </div>
+                        <a href="" class="header__lc header--desktop">
                             <span>Личный кабинет</span>
                             <i class="icon-user"></i>
                         </a>
+                        <div class="header__social social header--mobile">
+                            <ul class="social__list">
+                                <li class="social__item"><a href="" class="social__link"><i class="icon-whatsapp"></i></a></li>
+                                <li class="social__item"><a href="" class="social__link"><i class="icon-wechat"></i></a></li>
+                                <li class="social__item"><a href="" class="social__link"><i class="icon-telegram"></i></a></li>
+                            </ul>
+                        </div>
                     </nav>
                 </div>
             </div>
@@ -258,7 +276,7 @@
 			</div>
 		</section>
 		
-		<section class="services">
+		<section id="services" class="services menu-aim">
 			<div class="services__heading">
 				<div class="container">
 					<h2 class="services__title title-h2"><span>ДЛЯ КОГО?</span>Наши услуги</h2>
@@ -301,7 +319,7 @@
 							</div>
 							<div class="services__item-action">
 								<div class="services__item-btn">
-									<a href="" class="services__item-btn btn">Выбрать</a>
+									<a href="#requestModal" class="services__item-btn btn popup-link">Выбрать</a>
 								</div>
 								<div class="services__item-price">%2 <span>Комиссия от <br> выручки</span></div>
 							</div>
@@ -352,7 +370,7 @@
 							</div>
 							<div class="services__item-action">
 								<div class="services__item-btn">
-									<a href="" class="services__item-btn btn">Выбрать</a>
+									<a href="#requestModal" class="services__item-btn btn popup-link">Выбрать</a>
 								</div>
 								<div class="services__item-price">40 990 ₽</div>
 							</div>
@@ -403,7 +421,7 @@
 							</div>
 							<div class="services__item-action">
 								<div class="services__item-btn">
-									<a href="" class="services__item-btn btn">Выбрать</a>
+									<a href="#requestModal" class="services__item-btn btn popup-link">Выбрать</a>
 								</div>
 								<div class="services__item-price">40 990 ₽</div>
 							</div>
@@ -446,7 +464,7 @@
 							</div>
 							<div class="services__item-action">
 								<div class="services__item-btn">
-									<a href="" class="services__item-btn btn">Выбрать</a>
+									<a href="#requestModal" class="services__item-btn btn popup-link">Выбрать</a>
 								</div>
 								<div class="services__item-price">40 990 ₽</div>
 							</div>
@@ -456,7 +474,7 @@
 			</div>
 		</section>
 
-		<section class="cases">
+		<section id="cases" class="cases menu-aim">
 			<div class="cases__container container">
 				<h2 class="cases__title title-h2"><span>НАШИ УСПЕХИ</span>Кейсы компании</h2>
 				<div class="cases__items">
@@ -621,7 +639,7 @@
 			</div>
 		</section>
 
-		<section class="faq">
+		<section id="faq" class="faq menu-aim">
 			<div class="container">
 				<h2 class="faq__title title-h2"><span>ЕСТЬ ВОПРОСЫ?</span>FAQ</h2>
 				<div id="faqAccordion" class="accordion accordion-one">
@@ -728,6 +746,50 @@
 		</section>
 	</main>
 
+	<div class="modals">
+    <div id="requestModal" class="popup">
+        <div class="popup__body">
+            <div class="popup__content">
+                <a href="" class="popup__close">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12.0002 10.5862L16.9502 5.63623L18.3642 7.05023L13.4142 12.0002L18.3642 16.9502L16.9502 18.3642L12.0002 13.4142L7.05023 18.3642L5.63623 16.9502L10.5862 12.0002L5.63623 7.05023L7.05023 5.63623L12.0002 10.5862Z"
+                            fill="black" />
+                    </svg>
+                </a>
+                <div class="request__form form">
+                    <form action="#" id="request" class="form__body">
+                        <h4 class="form__title title-h4">Заполните форму</h4>
+                        <div class="form__row">
+                            <div class="form__item">
+                                <div class="form__item-wrapper">
+                                    <label for="requestModalName" class="form__label">Имя*:</label>
+                                    <input id="requestModalName" type="text" name="name" class="form__input">
+                                </div>
+                                <div class="form__error-txt">Текст сообщение ошибки!</div>
+                            </div>
+                        </div>
+                        <div class="form__row">
+                            <div class="form__item">
+                                <div class="form__item-wrapper">
+                                    <label for="requestModalPhone" class="form__label">Телефон*:</label>
+                                    <input id="requestModalPhone" type="text" name="phone" class="form__input form__input--phone" placeholder="+7 (---) --- -- --">
+                                </div>
+                                <div class="form__error-txt">Текст сообщение ошибки!</div>
+                            </div>
+                        </div>
+                        <div class="form__row">
+                            <div class="form__item mb-0">
+                                <button type="submit" class="form__button btn btn--big btn--bg">Оставить заявку</button>
+                                <div class="form__privacy">Нажимая на кнопку, вы дёте свое согласие на обработку <a href="">персональных данных</a></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 	<footer class="site__footer footer">
     <div class="container">
         <div class="footer__top">
@@ -753,7 +815,7 @@
                         <li class="social__item"><a href="" class="social__link"><i class="icon-telegram"></i></a></li>
                     </ul>
                 </div>
-                <a href="" class="footer__request btn popup-link">
+                <a href="#requestModal" class="footer__request btn popup-link">
                     <span>Написать</span>
                     <i class="icon-message"></i>
                 </a>

@@ -452,7 +452,7 @@ $(document).ready(function () {
 
       if (menuLink.dataset["goto"] && document.querySelector(menuLink.dataset["goto"])) {
         var gotoBlock = document.querySelector(menuLink.dataset["goto"]);
-        var gotoBlockValue = gotoBlock.getBoundingClientRect().top + pageYOffset - document.querySelector('header').offsetHeight;
+        var gotoBlockValue = gotoBlock.getBoundingClientRect().top + pageYOffset - document.querySelector('header').offsetHeight - 30;
 
         if (iconMenu.classList.contains('active')) {
           removeActive();
@@ -474,8 +474,33 @@ $(document).ready(function () {
     menuLinks.forEach(function (menuLink) {
       menuLink.addEventListener('click', onMenuLinkClick);
     });
-  } // === FORM INPUT FOCUS CONDITION ===
+  } // Ативное состояние меню при прокрутке страницы 
 
+
+  var section = $('.menu-aim'),
+      nav = $('.header__body'),
+      navHeight = nav.outerHeight(); // получаем высоту навигации 
+  // поворот экрана 
+
+  window.addEventListener('orientationchange', function () {
+    navHeight = nav.outerHeight();
+  }, false);
+  $(window).on('scroll', function () {
+    var position = $(this).scrollTop();
+    navHeight = nav.outerHeight();
+    console.log(navHeight);
+    section.each(function () {
+      var top = $(this).offset().top - navHeight - 40,
+          bottom = top + $(this).outerHeight();
+
+      if (position >= top && position <= bottom) {
+        nav.find('.header__menu-link').removeClass('active');
+        section.removeClass('active');
+        $(this).addClass('active');
+        nav.find('.header__menu-link[href="#' + $(this).attr('id') + '"]').addClass('active');
+      }
+    });
+  }); // === FORM INPUT FOCUS CONDITION ===
 
   $('.form__input').focus(function () {
     $(this).closest('.form__item-wrapper').addClass('focus');
@@ -562,6 +587,142 @@ $(document).ready(function () {
 
     $(this).toggleClass('active').next().slideToggle(300);
   });
+  var popupLinks = document.querySelectorAll('.popup-link');
+  var body = document.querySelector('body');
+  var lockPadding = document.querySelectorAll(".lock-padding");
+  var unlock = true;
+  var timeout = 800;
+
+  if (popupLinks.length > 0) {
+    var _loop2 = function _loop2(index) {
+      var popupLink = popupLinks[index];
+      popupLink.addEventListener("click", function (e) {
+        var popupName = popupLink.getAttribute('href').replace('#', '');
+        var currentPopup = document.getElementById(popupName);
+        popupOpen(currentPopup);
+        e.preventDefault();
+      });
+    };
+
+    for (var index = 0; index < popupLinks.length; index++) {
+      _loop2(index);
+    }
+  }
+
+  var popupCloseIcon = document.querySelectorAll('.popup__close');
+
+  if (popupCloseIcon.length > 0) {
+    var _loop3 = function _loop3(_index) {
+      var el = popupCloseIcon[_index];
+      el.addEventListener('click', function (e) {
+        popupClose(el.closest('.popup'));
+        e.preventDefault();
+      });
+    };
+
+    for (var _index = 0; _index < popupCloseIcon.length; _index++) {
+      _loop3(_index);
+    }
+  }
+
+  function popupOpen(currentPopup) {
+    if (currentPopup && unlock) {
+      var popupActive = document.querySelector('.popup.open');
+
+      if (popupActive) {
+        popupClose(popupActive, false);
+      } else {
+        bodyLock();
+      }
+
+      currentPopup.classList.add('open');
+      currentPopup.addEventListener('click', function (e) {
+        if (!e.target.closest('.popup__content')) {
+          popupClose(e.target.closest('.popup'));
+        }
+      });
+    }
+  }
+
+  function popupClose(popupActive) {
+    var doUnlock = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+    if (unlock) {
+      popupActive.classList.remove('open');
+
+      if (doUnlock) {
+        bodyUnLock();
+      }
+    }
+  }
+
+  function bodyLock() {
+    var lockPaddingValue = window.innerWidth - document.querySelector('.site__main').offsetWidth + 'px'; //!обратить внимание на контейнер
+
+    if (lockPadding.length > 0) {
+      for (var _index2 = 0; _index2 < lockPadding.length; _index2++) {
+        var el = lockPadding[_index2];
+        el.style.paddingRight = lockPaddingValue;
+      }
+    }
+
+    body.style.paddingRight = lockPaddingValue;
+    body.classList.add('lock');
+    unlock = false;
+    setTimeout(function () {
+      unlock = true;
+    }, timeout);
+  }
+
+  function bodyUnLock() {
+    setTimeout(function () {
+      if (lockPadding.length > 0) {
+        for (var _index3 = 0; _index3 < lockPadding.length; _index3++) {
+          var el = lockPadding[_index3];
+          el.style.paddingRight = '0px';
+        }
+      }
+
+      body.style.paddingRight = '0px';
+      body.classList.remove('lock');
+    }, timeout);
+    unlock = false;
+    setTimeout(function () {
+      unlock = true;
+    }, timeout);
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.which === 27) {
+      var popupActive = document.querySelector('.popup.open');
+      popupClose(popupActive);
+    }
+  });
+
+  (function () {
+    // проверяем поддержку
+    if (!Element.prototype.closest) {
+      // реализуем
+      Element.prototype.closest = function (css) {
+        var node = this;
+
+        while (node) {
+          if (node.matches(css)) return node;else node = node.parentElement;
+        }
+
+        return null;
+      };
+    }
+  })();
+
+  (function () {
+    // проверяем поддержку
+    if (!Element.prototype.matches) {
+      // определяем свойство
+      Element.prototype.matches = Element.prototype.matchesSelector || Element.prototype.webkitMatchesSelector || Element.prototype.mozMatchesSelector || Element.prototype.msMatchesSelector;
+    }
+  })();
+
   ;
   var scene = document.getElementById('scene');
   var parallaxInstance = new Parallax(scene);

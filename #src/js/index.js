@@ -5,4 +5,5 @@
 @@include('components/form.js')
 @@include('components/slider.js')
 @@include('components/accordion.js')
+@@include('components/popup.js')
 

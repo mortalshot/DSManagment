@@ -36,7 +36,7 @@ if (menuLinks.length > 0) {
 
         if (menuLink.dataset.goto && document.querySelector(menuLink.dataset.goto)) {
             const gotoBlock = document.querySelector(menuLink.dataset.goto);
-            const gotoBlockValue = gotoBlock.getBoundingClientRect().top + pageYOffset - document.querySelector('header').offsetHeight;
+            const gotoBlockValue = gotoBlock.getBoundingClientRect().top + pageYOffset - document.querySelector('header').offsetHeight - 30;
 
             if (iconMenu.classList.contains('active')) {
                 removeActive();
@@ -53,3 +53,32 @@ if (menuLinks.length > 0) {
         menuBody.classList.remove('active');
     }
 }
+
+// Ативное состояние меню при прокрутке страницы 
+let section = $('.menu-aim'),
+    nav = $('.header__body'),
+    navHeight = nav.outerHeight(); // получаем высоту навигации 
+// поворот экрана 
+window.addEventListener('orientationchange', function () {
+    navHeight = nav.outerHeight();
+}, false);
+
+$(window).on('scroll', function () {
+    const position = $(this).scrollTop();
+
+    navHeight = nav.outerHeight();
+    console.log(navHeight);
+
+    section.each(function () {
+        const top = $(this).offset().top - navHeight - 40,
+            bottom = top + $(this).outerHeight();
+
+        if (position >= top && position <= bottom) {
+            nav.find('.header__menu-link').removeClass('active');
+            section.removeClass('active');
+
+            $(this).addClass('active');
+            nav.find('.header__menu-link[href="#' + $(this).attr('id') + '"]').addClass('active');
+        }
+    });
+});

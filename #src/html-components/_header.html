@@ -11,7 +11,7 @@
 
 <body class="site">
     <div class="site__wrap">
-        <header class="site__header header">
+        <header class="site__header header lock-padding">
             <div class="header__container container">
                 <div class="header__body">
                         <div class="header__burger">
@@ -26,18 +26,36 @@
                             </div>
                         </a>
                     </div>
+                    <a href="" class="header__lc header--mobile">
+                        <span>Личный кабинет</span>
+                        <i class="icon-user"></i>
+                    </a>
                     <nav class="header__menu menu">
                         <ul class="header__list menu__list">
-                            <li class="header__menu-item menu__item"><a href="" class="header__menu-link menu__link" data-goto=".services">Услуги</a></li>
-                            <li class="header__menu-item menu__item"><a href="" class="header__menu-link menu__link" data-goto=".cases">Кейсы</a></li>
-                            <li class="header__menu-item menu__item"><a href="" class="header__menu-link menu__link" data-goto=".faq">FAQ</a></li>
+                            <li class="header__menu-item menu__item"><a href="#services" class="header__menu-link menu__link" data-goto=".services">Услуги</a></li>
+                            <li class="header__menu-item menu__item"><a href="#cases" class="header__menu-link menu__link" data-goto=".cases">Кейсы</a></li>
+                            <li class="header__menu-item menu__item"><a href="#faq" class="header__menu-link menu__link" data-goto=".faq">FAQ</a></li>
                         </ul>
                         <a href="tel:+74959234242" class="header__phone">+7 (495) 923 42 42</a>
-                        <a href="" class="header__link">Зарегистрироваться</a>
-                        <a href="" class="header__lc" data-da="header__body, last, 991">
+                        <a href="" class="header__link header--desktop">Зарегистрироваться</a>
+                        <a href="mailto:company@mail.com" class="header__link header--mobile">company@mail.com</a>
+                        <div class="header__file footer__file header--mobile">
+                            <a href="">
+                                <i class="icon-download"></i>
+                                <span>Скачать презентацию</span>
+                            </a>
+                        </div>
+                        <a href="" class="header__lc header--desktop">
                             <span>Личный кабинет</span>
                             <i class="icon-user"></i>
                         </a>
+                        <div class="header__social social header--mobile">
+                            <ul class="social__list">
+                                <li class="social__item"><a href="" class="social__link"><i class="icon-whatsapp"></i></a></li>
+                                <li class="social__item"><a href="" class="social__link"><i class="icon-wechat"></i></a></li>
+                                <li class="social__item"><a href="" class="social__link"><i class="icon-telegram"></i></a></li>
+                            </ul>
+                        </div>
                     </nav>
                 </div>
             </div>
